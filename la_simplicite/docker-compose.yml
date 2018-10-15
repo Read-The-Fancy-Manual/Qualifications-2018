@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    build: .
+    image: webserver-3
+    container_name: webserver-3
+    environment:
+      - APACHE_ENVVARS=/etc/apache2/envvars
+    ports:
+      - "8880:80"
+    networks:
+      - webserver-3
+    restart: always
+    volumes:
+      - ./www:/var/www/html
+
+networks:
+  webserver-3:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"
+      com.docker.network.bridge.name: "webserver-3"

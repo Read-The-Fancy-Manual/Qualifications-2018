@@ -1,0 +1,18 @@
+version: '3'
+services:
+  pythonpath:
+    build: .
+    image: pythonpath
+    container_name: pythonpath
+    ports:
+      - "4443:22"
+    networks:
+      - pythonpath_network
+    restart: always
+
+networks:
+  pythonpath_network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"
+      com.docker.network.bridge.name: "app-script-1"
